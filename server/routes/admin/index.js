@@ -21,6 +21,7 @@ module.exports = app => {
   router.delete('/:id', async (req, res) => {
     await req.Model.findByIdAndDelete(req.params.id)
     res.send({
+      // 返回 success 为true , 前端 $message 提示 成功  
       success: true
     })
   })
