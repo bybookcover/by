@@ -1,6 +1,7 @@
 <template>
   <el-container style="height: 100vh;">
     <el-aside width="200px" style="background-color: rgb(238, 241, 246)">
+      <!-- router 的作用是路由跳转用的 index 跳转的路由位置 展示在下面的router-view -->
       <el-menu router :default-openeds="['1','3']" unique-opened :default-active="$route.path">
         <el-submenu index="1">
           <template slot="title">
@@ -8,13 +9,13 @@
           </template>
           <el-menu-item-group>
             <template slot="title">产品</template>
-            <el-menu-item index="/heroes/create">新建产品</el-menu-item>
-            <el-menu-item index="/heroes/list">产品列表</el-menu-item>
+            <el-menu-item index="/products/create">新建产品</el-menu-item>
+            <el-menu-item index="/products/list">产品列表</el-menu-item>
           </el-menu-item-group>
           <el-menu-item-group>
             <template slot="title">产品详情</template>
-            <el-menu-item index="/items/create">新建详情</el-menu-item>
-            <el-menu-item index="/items/list">详情列表</el-menu-item>
+            <el-menu-item index="/details/create">新建详情</el-menu-item>
+            <el-menu-item index="/details/list">详情列表</el-menu-item>
           </el-menu-item-group>
           <el-menu-item-group>
             <template slot="title">文章</template>

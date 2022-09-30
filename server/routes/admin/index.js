@@ -39,9 +39,9 @@ module.exports = app => {
     res.send(model)
   })
   // 登录校验中间件
-  const authMiddleware = require('../../middleware/auth')
+  // const authMiddleware = require('../../middleware/auth')
   const resourceMiddleware = require('../../middleware/resource')
-  app.use('/admin/api/rest/:resource', authMiddleware(), resourceMiddleware(), router)
+  app.use('/admin/api/rest/:resource', resourceMiddleware(), router)
 
   const multer = require('multer')
   const MAO = require('multer-aliyun-oss');
@@ -56,7 +56,7 @@ module.exports = app => {
       }
     })
   })
-  app.post('/admin/api/upload', authMiddleware(), upload.single('file'), async (req, res) => {
+  app.post('/admin/api/upload',  upload.single('file'), async (req, res) => {
     const file = req.file
     // file.url = `http://test.topfullstack.com/uploads/${file.filename}`
     res.send(file)

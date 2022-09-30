@@ -10,7 +10,10 @@ app.use('/', express.static(__dirname + '/web'))
 app.use('/admin', express.static(__dirname + '/admin'))
 app.use('/uploads', express.static(__dirname + '/uploads'))
 
+// 连接数据库
 require('./plugins/db')(app)
+
+// 路由
 require('./routes/admin')(app)
 require('./routes/web')(app)
 
