@@ -5,11 +5,11 @@ import Main from './views/Main.vue'
 import CategoryEdit from './views/CategoryEdit.vue'
 import CategoryList from './views/CategoryList.vue'
 
-import ItemEdit from './views/ItemEdit.vue'
-import ItemList from './views/ItemList.vue'
+import DetailEdit from './views/DetailEdit.vue'
+import DetailList from './views/DetailList.vue'
 
-import HeroEdit from './views/HeroEdit.vue'
-import HeroList from './views/HeroList.vue'
+import ProductEdit from './views/ProductEdit.vue'
+import ProductList from './views/ProductList.vue'
 
 import ArticleEdit from './views/ArticleEdit.vue'
 import ArticleList from './views/ArticleList.vue'
@@ -35,13 +35,13 @@ const router = new Router({
         { path: '/categories/edit/:id', component: CategoryEdit, props: true },
         { path: '/categories/list', component: CategoryList },
 
-        { path: '/items/create', component: ItemEdit },
-        { path: '/items/edit/:id', component: ItemEdit, props: true },
-        { path: '/items/list', component: ItemList },
+        { path: '/details/create', component: DetailEdit },
+        { path: '/details/edit/:id', component: DetailEdit, props: true },
+        { path: '/details/list', component: DetailList },
 
-        { path: '/heroes/create', component: HeroEdit },
-        { path: '/heroes/edit/:id', component: HeroEdit, props: true },
-        { path: '/heroes/list', component: HeroList },
+        { path: '/products/create', component: ProductEdit },
+        { path: '/products/edit/:id', component: ProductEdit, props: true },
+        { path: '/products/list', component: ProductList },
 
         { path: '/articles/create', component: ArticleEdit },
         { path: '/articles/edit/:id', component: ArticleEdit, props: true },
