@@ -42,18 +42,18 @@ export default {
     async save() {
       let res;
       if (this.id) {
-        res = await this.$http.put(`rest/items/${this.id}`, this.model);
+        res = await this.$http.put(`rest/products/${this.id}`, this.model);
       } else {
-        res = await this.$http.post("rest/items", this.model);
+        res = await this.$http.post("rest/products", this.model);
       }
-      this.$router.push("/items/list");
+      this.$router.push("/products/list");
       this.$message({
         type: "success",
         message: "保存成功"
       });
     },
     async fetch() {
-      const res = await this.$http.get(`rest/items/${this.id}`);
+      const res = await this.$http.get(`rest/products/${this.id}`);
       this.model = res.data;
     }
   },

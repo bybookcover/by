@@ -1,7 +1,7 @@
 <template>
   <div>
     <h1>物品列表</h1>
-    <el-table :data="items">
+    <el-table :data="products">
       <el-table-column prop="_id" label="ID" width="240"></el-table-column>
       <el-table-column prop="name" label="物品名称"></el-table-column>
       <el-table-column prop="icon" label="图标">
@@ -14,7 +14,7 @@
           <el-button
             type="text"
             size="small"
-            @click="$router.push(`/items/edit/${scope.row._id}`)"
+            @click="$router.push(`/products/edit/${scope.row._id}`)"
           >编辑</el-button>
           <el-button type="text" size="small" @click="remove(scope.row)">删除</el-button>
         </template>
@@ -27,13 +27,13 @@
 export default {
   data() {
     return {
-      items: []
+      products: []
     };
   },
   methods: {
     async fetch() {
-      const res = await this.$http.get("rest/items");
-      this.items = res.data;
+      const res = await this.$http.get("rest/products");
+      this.products = res.data;
     },
     remove(row) {
       this.$confirm(`是否确定要删除分类 "${row.name}"`, "提示", {
@@ -41,7 +41,7 @@ export default {
         cancelButtonText: "取消",
         type: "warning"
       }).then(async () => {
-        const res = await this.$http.delete(`rest/items/${row._id}`);
+        const res = await this.$http.delete(`rest/products/${row._id}`);
         this.$message({
           type: "success",
           message: "删除成功!"
