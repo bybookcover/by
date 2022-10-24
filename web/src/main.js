@@ -22,6 +22,10 @@ Vue.prototype.$http = axios.create({
   baseURL: process.env.VUE_APP_API_URL || '/web/api'
   // baseURL: 'http://localhost:3000/web/api'
 })
+import { BootstrapVue } from 'bootstrap-vue'
+
+
+Vue.use(BootstrapVue)
 
 new Vue({
   router,

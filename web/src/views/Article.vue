@@ -35,6 +35,7 @@ export default {
     };
   },
   watch: {
+    /* 监测 articles 后面的 id 变化， 执行跳转 */
     id: 'fetch',
     // id(){
     //   this.fetch()

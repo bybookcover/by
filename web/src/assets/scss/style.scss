@@ -1,8 +1,11 @@
 @import './variables';
+@import 'node_modules/bootstrap/scss/bootstrap.scss';
+@import 'node_modules/bootstrap-vue/src/index.scss';
 
 // reset
 * {
   box-sizing: border-box;
+  //高亮样式
   outline: none;
 }
 html {
@@ -23,6 +26,7 @@ p {
 }
 
 @each $colorKey, $color in $colors {
+  
   .text-#{$colorKey} {
     color: $color;
   }
@@ -32,6 +36,7 @@ p {
 }
 // text align
 @each $var in (left, center, right) {
+  // 变量类名定义的时候外加 {} 和 # 引用  ，值直接写变量就行
   .text-#{$var} {
     text-align: $var !important;
   }

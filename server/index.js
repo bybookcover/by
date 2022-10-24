@@ -1,7 +1,7 @@
 const express = require("express")
 
 const app = express()
-
+// 密钥
 app.set('secret', 'i2u34y12oi3u4y8')
 
 app.use(require('cors')())

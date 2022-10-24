@@ -19,4 +19,4 @@ schema.virtual('newsList', {
   ref: 'Article'
 })
 
-module.exports = mongoose.model('Category', schema)
+module.exports = mongoose.model('Category', schema, 'categories')

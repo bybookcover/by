@@ -1,11 +1,17 @@
+const Detail = require('../../models/Detail')
+
 module.exports = app => {
   const express = require('express')
   const assert = require('http-assert')
   const jwt = require('jsonwebtoken')
   const AdminUser = require('../../models/AdminUser')
+
+  const Product = require('../../models/Product')
+  const Category = require('../../models/Category')
   const router = express.Router({
     mergeParams: true
   })
+
 
   // 创建资源
   router.post('/', async (req, res) => {
@@ -34,6 +40,7 @@ module.exports = app => {
     const items = await req.Model.find().setOptions(queryOptions).limit(100)
     res.send(items)
   })
+
   // 资源详情
   router.get('/:id', async (req, res) => {
     const model = await req.Model.findById(req.params.id)
@@ -67,16 +74,55 @@ module.exports = app => {
   app.post('/admin/api/login', async (req, res) => {
     const { username, password } = req.body
     // 1.根据用户名找用户
+    // select('+password') 表示 user 取出 password 的密文
 
     const user = await AdminUser.findOne({ username }).select('+password')
+    // assert 异常错误处理插件
     assert(user, 422, '用户不存在')
     // 2.校验密码
     const isValid = require('bcrypt').compareSync(password, user.password)
     assert(isValid, 422, '密码错误')
     // 3.返回token
+    // app.get('secret') 密钥
     const token = jwt.sign({ id: user._id }, app.get('secret'))
     res.send({ token })
   })
+  
+  // 产品详情带目录
+  app.get('/admin/api/prodcate', async (req, res) => {
+    const prodcate = await Product.aggregate([
+      {
+        $lookup: {
+            from: "categories",
+            localField: "categories",    // field in the orders collection
+            foreignField: "_id",  // field in the items collection
+            as: "fromItems"
+        }
+      },
+      {$project:{item_name:1,item_number:1,icon:1,fromItems:1}}
+    ]).limit(100)
+    const items = JSON.stringify(prodcate)
+    // console.log(items)
+    res.send(items)
+  })
+
+    // 产品详情带目录
+    app.get('/admin/api/detaitem', async (req, res) => {
+      const detaitem = await Detail.aggregate([
+        {
+          $lookup: {
+              from: "products",
+              localField: "item",    // field in the orders collection
+              foreignField: "_id",  // field in the items collection
+              as: "detailItems"
+          }
+        },
+        {$project:{name:1,picture:1,item:1,title:1,detailItems:1}}
+      ]).limit(100)
+      const items = JSON.stringify(detaitem)
+      // console.log(items)
+      res.send(items)
+    })
 
   // 错误处理函数
   app.use(async (err, req, res, next) => {

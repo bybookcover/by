@@ -1,9 +1,11 @@
 <template>
   <div>
     <h1>物品列表</h1>
-    <el-table :data="products">
-      <el-table-column prop="_id" label="ID" width="240"></el-table-column>
-      <el-table-column prop="name" label="物品名称"></el-table-column>
+    <el-table :data="items">
+      <el-table-column prop="_id" label="系统ID" width="240"></el-table-column>
+      <el-table-column prop="item_name" label="产品名称"></el-table-column>
+      <el-table-column prop="item_number" label="型号"></el-table-column>
+      <el-table-column prop="fromItems[0].name" label="所属分类"></el-table-column>
       <el-table-column prop="icon" label="图标">
         <template slot-scope="scope">
           <img :src="scope.row.icon" style="height:3rem;">
@@ -27,16 +29,17 @@
 export default {
   data() {
     return {
-      products: []
+      items: []
     };
   },
   methods: {
     async fetch() {
-      const res = await this.$http.get("rest/products");
-      this.products = res.data;
+      const res = await this.$http.get("prodcate");
+      this.items = res.data;
+      console.log(this.items)
     },
     remove(row) {
-      this.$confirm(`是否确定要删除分类 "${row.name}"`, "提示", {
+      this.$confirm(`是否确定要删除产品 "${row.item_name}"`, "提示", {
         confirmButtonText: "确定",
         cancelButtonText: "取消",
         type: "warning"
